@@ -1,11 +1,17 @@
-import { useContext } from "react";
+import { CSSProperties, useContext } from "react";
 import { ProductContext } from "./ProductCard";
-
 import noImage from "../assets/no-image.jpg";
 import styles from "../styles/styles.module.css";
 
+
+export interface Props {
+    img?: string,
+    className?: string,
+    style?: CSSProperties,
+}
+
 /* Compout component pattern */
-export const ProductImage = ({ img = '' }) => { /* De esta forma le digo a ts que la propiedad puede ser opcional */
+export const ProductImage = ({ className, img, style }: Props) => { /* De esta forma le digo a ts que la propiedad puede ser opcional */
 
     const {product} = useContext(ProductContext);
     let imgToShow: string;
@@ -19,6 +25,11 @@ export const ProductImage = ({ img = '' }) => { /* De esta forma le digo a ts qu
     }
 
     return (
-        <img className={styles.productImg} src={imgToShow} alt="Product Image" />
+        <img 
+            className={`${styles.productImg} ${className}`}
+            style={style} 
+            src={imgToShow} 
+            alt="Product Image" 
+        />
     )
 }
